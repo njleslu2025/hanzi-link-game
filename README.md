@@ -2,6 +2,10 @@
 
 一个基于 React + Vite 的中文连字消除小游戏。
 
+## 在线试玩
+
+https://njleslu2025.github.io/hanzi-link-game/
+
 ## 本地运行
 
 ```bash
