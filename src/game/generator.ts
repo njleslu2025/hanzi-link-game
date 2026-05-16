@@ -250,6 +250,15 @@ function buildBoard(
   return board;
 }
 
+function targetsMatchBoard(board: BoardCell[], targets: RoundTarget[]): boolean {
+  const boardLookup = new Map(board.map((cell) => [cell.id, cell.char]));
+
+  return targets.every((target) => {
+    const boardText = target.path.map((cellId) => boardLookup.get(cellId) ?? '').join('');
+    return boardText === target.text;
+  });
+}
+
 function tryLayout(
   words: WordEntry[],
   size: BoardSize,
@@ -294,8 +303,14 @@ function tryLayout(
     }
 
     const distractorPool = createDistractorPool(words);
+    const board = buildBoard(grid, distractorPool, random);
+
+    if (!targetsMatchBoard(board, targets)) {
+      continue;
+    }
+
     return {
-      board: buildBoard(grid, distractorPool, random),
+      board,
       targets,
     };
   }

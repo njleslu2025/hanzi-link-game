@@ -258,6 +258,7 @@ button {
   position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
+  overflow: hidden;
   border: 1px solid rgba(23, 54, 60, 0.16);
   border-radius: 0.9rem;
   background: var(--bg-grid);
@@ -283,25 +284,32 @@ button {
 }
 
 .cell-char {
+  position: relative;
+  z-index: 1;
+  display: block;
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .cell-order {
   position: absolute;
-  top: 0.22rem;
-  right: 0.22rem;
-  min-width: 1.1rem;
-  height: 1.1rem;
+  top: 0.18rem;
+  right: 0.18rem;
+  z-index: 2;
+  min-width: 0.95rem;
+  height: 0.95rem;
   border-radius: 999px;
   background: var(--accent-strong);
   color: #fff8ef;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.22rem;
-  font-size: 0.72rem;
+  padding: 0 0.18rem;
+  font-size: 0.64rem;
   font-weight: 700;
+  pointer-events: none;
 }
 
 .info-section {
@@ -339,9 +347,9 @@ button {
 }
 
 .target-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 0.75rem;
   padding: 0.8rem 0.9rem;
   border: 1px solid var(--border);
@@ -355,8 +363,12 @@ button {
 }
 
 .target-name {
+  display: block;
+  min-width: 0;
   font-size: 1rem;
   font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .target-item.matched .target-name {
@@ -365,6 +377,7 @@ button {
 }
 
 .target-meta {
+  justify-self: end;
   color: var(--ink-soft);
   font-size: 0.86rem;
   white-space: nowrap;

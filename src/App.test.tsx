@@ -20,4 +20,12 @@ describe('App', () => {
     render(<App />);
     expect(screen.getByRole('button', { name: '确定' })).toBeDisabled();
   });
+
+  it('shows 探鱼 in the target list for hard mode', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: '困难' }));
+
+    expect(screen.getAllByText('探鱼').length).toBeGreaterThan(0);
+  });
 });

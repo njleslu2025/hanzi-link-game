@@ -61,4 +61,25 @@ describe('createGameRound', () => {
       second.board.map((cell) => `${cell.id}:${cell.char}:${cell.targetId ?? ''}`),
     );
   });
+
+  it('keeps every target text aligned with the board across many seeds', () => {
+    const difficulties: DifficultyMode[] = ['easy', 'normal', 'hard'];
+    const roundsPerDifficulty = {
+      easy: 500,
+      normal: 500,
+      hard: 150,
+    } as const;
+
+    for (const difficulty of difficulties) {
+      for (let seed = 1; seed <= roundsPerDifficulty[difficulty]; seed += 1) {
+        const round = createGameRound(difficulty, seed);
+        const boardLookup = new Map(round.board.map((cell) => [cell.id, cell.char]));
+
+        for (const target of round.targets) {
+          const boardText = target.path.map((cellId) => boardLookup.get(cellId) ?? '').join('');
+          expect(boardText).toBe(target.text);
+        }
+      }
+    }
+  });
 });
