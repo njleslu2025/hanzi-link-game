@@ -109,14 +109,14 @@ export default function App() {
       return;
     }
 
-    const matchedTarget = findMatchedTarget(selection, round.targets);
+    const matchedTarget = findMatchedTarget(selection, round.targets, boardLookup);
 
     if (!matchedTarget) {
       setNotice({ kind: 'error', text: '答案不正确，请检查顺序或位置。' });
       return;
     }
 
-    const matchedCellIds = new Set(selection);
+    const matchedCellIds = new Set([...selection, ...matchedTarget.path]);
     setRound((currentRound) => ({
       ...currentRound,
       board: currentRound.board.map((cell) =>

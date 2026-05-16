@@ -65,14 +65,29 @@ export function updateSelection(
 export function findMatchedTarget(
   selection: string[],
   targets: RoundTarget[],
+  boardLookup: Map<string, BoardCell>,
 ): RoundTarget | null {
+  if (selection.length === 0) {
+    return null;
+  }
+
+  const selectedCells = selection
+    .map((cellId) => boardLookup.get(cellId))
+    .filter((cell): cell is BoardCell => Boolean(cell));
+
+  if (selectedCells.length !== selection.length) {
+    return null;
+  }
+
+  const selectedText = selectedCells.map((cell) => cell.char).join('');
+
   return (
     targets.find((target) => {
-      if (target.matched || target.path.length !== selection.length) {
+      if (target.matched || target.text !== selectedText) {
         return false;
       }
 
-      return target.path.every((cellId, index) => cellId === selection[index]);
+      return selectedCells.every((cell) => !cell.targetId || cell.targetId === target.id);
     }) ?? null
   );
 }
