@@ -1,4 +1,4 @@
-export type Category = 'place' | 'restaurant';
+export type Category = 'place' | 'restaurant' | 'memory';
 
 export type DifficultyMode = 'easy' | 'normal' | 'hard';
 

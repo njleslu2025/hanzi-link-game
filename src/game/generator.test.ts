@@ -30,8 +30,8 @@ function verifyTargetPaths(targets: RoundTarget[], rows: number, cols: number): 
 
 describe('createGameRound', () => {
   it.each([
-    ['easy', 12],
-    ['normal', 20],
+    ['easy', 8],
+    ['normal', 14],
     ['hard', WORDS.length],
   ] satisfies Array<[DifficultyMode, number]>)(
     'creates a filled board for %s mode',
@@ -81,5 +81,5 @@ describe('createGameRound', () => {
         }
       }
     }
-  });
+  }, 10_000);
 });

@@ -28,8 +28,16 @@ function createRound(difficulty: DifficultyMode, seed: number): GameRound {
   return createGameRound(difficulty, seed);
 }
 
-function getCategoryLabel(category: GameRound['targets'][number]['category']): string {
-  return category === 'place' ? '地名' : '饭店';
+function getCategoryLabel(category: GameRound['targets'][number]['category']): string | null {
+  if (category === 'place') {
+    return '地名';
+  }
+
+  if (category === 'restaurant') {
+    return '饭店';
+  }
+
+  return null;
 }
 
 function getCellOrder(selection: string[]): Map<string, number> {
@@ -171,7 +179,7 @@ export default function App() {
           <p className="eyebrow">霓虹记忆小游戏</p>
           <h1>你还记得这些吗？</h1>
           <p className="subtitle">
-            把散在晚风和灯牌里的旧地名、熟悉饭店名，一笔一画地重新拼回来。
+            把散在晚风和灯牌里的地方、名字和片段，一笔一画地重新拼回来。
           </p>
           <div className="hero-hearts" aria-hidden="true">
             <span>♥</span>
@@ -272,7 +280,9 @@ export default function App() {
                   className={target.matched ? 'target-item matched' : 'target-item'}
                 >
                   <span className="target-name">{target.text}</span>
-                  <span className="target-meta">{getCategoryLabel(target.category)}</span>
+                  {getCategoryLabel(target.category) && (
+                    <span className="target-meta">{getCategoryLabel(target.category)}</span>
+                  )}
                 </li>
               ))}
             </ul>

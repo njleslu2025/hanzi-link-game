@@ -24,8 +24,8 @@ interface GridCell {
 }
 
 const DIFFICULTY_COUNTS: Record<DifficultyMode, number> = {
-  easy: 12,
-  normal: 20,
+  easy: 8,
+  normal: 14,
   hard: WORDS.length,
 };
 

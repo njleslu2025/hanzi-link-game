@@ -7,10 +7,10 @@ describe('App', () => {
   it('shows the easy mode target count by default and switches difficulty counts', () => {
     render(<App />);
 
-    expect(screen.getAllByText('0/12').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('0/8').length).toBeGreaterThan(0);
 
     fireEvent.click(screen.getByRole('button', { name: '普通' }));
-    expect(screen.getAllByText('0/20').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('0/14').length).toBeGreaterThan(0);
 
     fireEvent.click(screen.getByRole('button', { name: '困难' }));
     expect(screen.getAllByText(`0/${WORDS.length}`).length).toBeGreaterThan(0);
@@ -21,11 +21,11 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: '确定' })).toBeDisabled();
   });
 
-  it('shows 探鱼 in the target list for hard mode', () => {
+  it('shows 光明玖壹玖 in the target list for hard mode', () => {
     render(<App />);
 
     fireEvent.click(screen.getByRole('button', { name: '困难' }));
 
-    expect(screen.getAllByText('探鱼').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('光明玖壹玖').length).toBeGreaterThan(0);
   });
 });
