@@ -9,11 +9,16 @@ interface NoticeState {
   text: string;
 }
 
+type CompletionStage = 'hidden' | 'heart' | 'panel';
+
 const DIFFICULTY_LABELS: Record<DifficultyMode, string> = {
   easy: '简单',
   normal: '普通',
   hard: '困难',
 };
+
+const COMPLETION_HEART_DURATION_MS = 1700;
+const REDUCED_MOTION_HEART_DURATION_MS = 420;
 
 function createFreshSeed(): number {
   return Math.floor(Math.random() * 1_000_000_000);
@@ -38,12 +43,25 @@ function getSelectionText(selection: string[], boardLookup: Map<string, BoardCel
     .join('');
 }
 
+function getCompletionHeartDuration(): number {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    return REDUCED_MOTION_HEART_DURATION_MS;
+  }
+
+  return COMPLETION_HEART_DURATION_MS;
+}
+
 export default function App() {
   const [difficulty, setDifficulty] = useState<DifficultyMode>('easy');
   const [seed, setSeed] = useState<number>(() => createFreshSeed());
   const [round, setRound] = useState<GameRound>(() => createRound('easy', seed));
   const [selection, setSelection] = useState<string[]>([]);
   const [notice, setNotice] = useState<NoticeState | null>(null);
+  const [completionStage, setCompletionStage] = useState<CompletionStage>('hidden');
 
   useEffect(() => {
     if (!notice) {
@@ -64,12 +82,28 @@ export default function App() {
   const totalCount = round.targets.length;
   const isComplete = completedCount === totalCount;
 
+  useEffect(() => {
+    if (!isComplete) {
+      setCompletionStage('hidden');
+      return undefined;
+    }
+
+    setCompletionStage('heart');
+
+    const timer = window.setTimeout(() => {
+      setCompletionStage('panel');
+    }, getCompletionHeartDuration());
+
+    return () => window.clearTimeout(timer);
+  }, [isComplete, round.seed]);
+
   const startRound = (nextDifficulty: DifficultyMode, nextSeed: number) => {
     setDifficulty(nextDifficulty);
     setSeed(nextSeed);
     setRound(createRound(nextDifficulty, nextSeed));
     setSelection([]);
     setNotice(null);
+    setCompletionStage('hidden');
   };
 
   const handleDifficultyChange = (mode: DifficultyMode) => {
@@ -116,7 +150,7 @@ export default function App() {
       return;
     }
 
-    const matchedCellIds = new Set([...selection, ...matchedTarget.path]);
+    const matchedCellIds = new Set(selection);
     setRound((currentRound) => ({
       ...currentRound,
       board: currentRound.board.map((cell) =>
@@ -134,11 +168,16 @@ export default function App() {
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-block">
-          <p className="eyebrow">网页小游戏</p>
-          <h1>连字消除</h1>
+          <p className="eyebrow">霓虹记忆小游戏</p>
+          <h1>你还记得这些吗？</h1>
           <p className="subtitle">
-            从矩阵里按顺序找出完整名称，提交正确后就能把它们消掉。
+            把散在晚风和灯牌里的旧地名、熟悉饭店名，一笔一画地重新拼回来。
           </p>
+          <div className="hero-hearts" aria-hidden="true">
+            <span>♥</span>
+            <span>♥</span>
+            <span>♥</span>
+          </div>
         </div>
         <div className="topbar-meta">
           <div className="difficulty-switch" role="tablist" aria-label="选择难度">
@@ -274,11 +313,34 @@ export default function App() {
         </div>
       )}
 
-      {isComplete && (
-        <div className="completion-overlay" role="dialog" aria-modal="true">
+      {isComplete && completionStage === 'heart' && (
+        <div className="completion-overlay completion-overlay-heart" aria-hidden="true">
+          <div className="completion-heart-scene" data-testid="completion-heart-scene">
+            <div className="completion-heart-glow" />
+            <div className="completion-heart" />
+            <span className="completion-heart-spark spark-left">✦</span>
+            <span className="completion-heart-spark spark-right">♥</span>
+            <span className="completion-heart-spark spark-bottom">✦</span>
+          </div>
+        </div>
+      )}
+
+      {isComplete && completionStage === 'panel' && (
+        <div
+          className="completion-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="completion-title"
+        >
           <div className="completion-panel">
+            <div className="completion-burst" aria-hidden="true">
+              <span>♥</span>
+              <span>✦</span>
+              <span>♥</span>
+            </div>
             <p className="eyebrow">完成全部目标</p>
-            <h2>这一局清干净了</h2>
+            <h2 id="completion-title">恭喜通关</h2>
+            <p className="completion-message">看来我们之间的经历你并没有忘记</p>
             <p>你已经找出了本局全部 {totalCount} 个名称。</p>
             <div className="completion-actions">
               <button type="button" className="ghost-button" onClick={handleRestart}>
