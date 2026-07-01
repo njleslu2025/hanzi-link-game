@@ -21,4 +21,9 @@ export const WORDS: WordEntry[] = [
   { id: 'memory-18', text: '双子山', category: 'memory' },
   { id: 'memory-19', text: '福鼓鳍', category: 'memory' },
   { id: 'memory-20', text: '三号仓库', category: 'memory' },
+  { id: 'memory-21', text: '淀山湖', category: 'memory' },
+  { id: 'memory-22', text: '河南博物院', category: 'memory' },
+  { id: 'memory-23', text: '龙门石窟', category: 'memory' },
+  { id: 'memory-24', text: '白马寺', category: 'memory' },
+  { id: 'memory-25', text: '魔都迷踪', category: 'memory' },
 ];
