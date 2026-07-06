@@ -80,6 +80,10 @@ describe('App completion overlay', () => {
 
     expect(screen.getByText('恭喜通关')).toBeInTheDocument();
     expect(screen.getByText('看来我们之间的经历你并没有忘记')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '打开生日礼物' })).toHaveAttribute(
+      'href',
+      '/birthday/index.html',
+    );
   });
 
   it('clears only the submitted path when an alternate valid route is used', async () => {
