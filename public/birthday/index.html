@@ -45,6 +45,10 @@
         overflow-x: hidden;
       }
 
+      body.lightbox-open {
+        overflow: hidden;
+      }
+
       body::before {
         content: "";
         position: fixed;
@@ -77,10 +81,35 @@
       }
 
       .hero {
+        position: relative;
         min-height: min(760px, calc(100vh - 2rem));
         display: grid;
         align-content: center;
         gap: 2rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 220, 237, 0.2);
+        border-radius: 2rem;
+        padding: clamp(2rem, 6vw, 4.2rem);
+        background:
+          linear-gradient(90deg, rgba(21, 9, 24, 0.78), rgba(43, 17, 40, 0.48) 48%, rgba(43, 17, 40, 0.2)),
+          url("./photos/06/06-001.jpg") center / cover;
+        box-shadow: 0 28px 72px rgba(24, 8, 28, 0.34);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(23, 13, 24, 0.12), rgba(23, 13, 24, 0.7)),
+          radial-gradient(circle at 26% 22%, rgba(255, 177, 211, 0.34), transparent 24rem);
+      }
+
+      .hero-copy,
+      .hero .music-card {
+        position: relative;
+        z-index: 1;
       }
 
       .eyebrow {
@@ -213,15 +242,7 @@
       }
 
       .section {
-        margin-top: 3rem;
-        padding: 1.25rem;
-        border: 1px solid var(--border);
-        border-radius: 1.45rem;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%),
-          var(--panel);
-        backdrop-filter: blur(18px);
-        box-shadow: 0 24px 52px rgba(24, 8, 28, 0.28);
+        margin-top: clamp(3rem, 8vw, 5rem);
       }
 
       .section-heading {
@@ -237,33 +258,112 @@
         color: var(--muted);
       }
 
-      .memory-grid {
+      .gallery-summary {
+        min-width: 7.4rem;
+        border: 1px solid rgba(255, 212, 232, 0.24);
+        border-radius: 999px;
+        padding: 0.72rem 1rem;
+        background: rgba(63, 28, 58, 0.58);
+        color: #ffe2ef;
+        font-weight: 800;
+        text-align: center;
+        box-shadow: 0 16px 30px rgba(24, 8, 28, 0.18);
+      }
+
+      .month-list {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.9rem;
+        gap: 1.2rem;
       }
 
-      .memory-card {
-        min-height: 12rem;
+      .month-block {
         border: 1px solid rgba(255, 212, 232, 0.18);
-        border-radius: 1.1rem;
-        padding: 1rem;
+        border-radius: 1.45rem;
+        padding: clamp(0.8rem, 2.2vw, 1.2rem);
         background:
-          radial-gradient(circle at 24% 16%, rgba(255, 207, 226, 0.18), transparent 34%),
-          rgba(86, 36, 70, 0.48);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 30%),
+          rgba(69, 26, 58, 0.48);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 24px 52px rgba(24, 8, 28, 0.24);
+      }
+
+      .month-heading {
         display: flex;
-        flex-direction: column;
-        justify-content: end;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.9rem;
       }
 
-      .memory-card h3 {
-        font-size: 1.25rem;
+      .month-heading h3 {
+        font-size: clamp(1.55rem, 4vw, 2.25rem);
       }
 
-      .memory-card p {
-        margin: 0.45rem 0 0;
+      .month-heading p {
+        margin: 0.3rem 0 0;
         color: var(--muted);
         line-height: 1.7;
+      }
+
+      .month-count {
+        flex: 0 0 auto;
+        color: #ffe0ee;
+        font-weight: 800;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.7rem;
+      }
+
+      .photo-card {
+        position: relative;
+        min-width: 0;
+        border: 0;
+        border-radius: 1rem;
+        padding: 0;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: rgba(255, 229, 240, 0.12);
+        box-shadow: 0 14px 30px rgba(24, 8, 28, 0.22);
+        cursor: pointer;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          filter 180ms ease;
+      }
+
+      .photo-card:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-2px);
+        filter: saturate(1.08);
+        box-shadow:
+          0 20px 40px rgba(24, 8, 28, 0.3),
+          0 0 28px rgba(255, 151, 195, 0.2);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .photo-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 56%, rgba(28, 9, 30, 0.42));
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .photo-card:hover::after {
+        opacity: 1;
       }
 
       .letter {
@@ -294,6 +394,79 @@
         box-shadow: 0 18px 36px rgba(24, 8, 28, 0.28);
         backdrop-filter: blur(16px);
         animation: heartBeat 3s ease-in-out infinite;
+      }
+
+      .lightbox[hidden] {
+        display: none;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: clamp(0.8rem, 3vw, 2rem);
+      }
+
+      .lightbox-backdrop {
+        position: absolute;
+        inset: 0;
+        border: 0;
+        background: rgba(13, 5, 15, 0.82);
+        backdrop-filter: blur(18px);
+        cursor: pointer;
+      }
+
+      .lightbox-panel {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 68rem);
+        max-height: min(90vh, 56rem);
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 0.9rem;
+      }
+
+      .lightbox-bar,
+      .lightbox-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+      }
+
+      .lightbox-caption {
+        color: #ffe1ef;
+        font-weight: 800;
+      }
+
+      .lightbox-button {
+        min-height: 2.8rem;
+        border: 1px solid rgba(255, 212, 232, 0.28);
+        border-radius: 999px;
+        padding: 0.72rem 1rem;
+        color: #fff7fb;
+        background: rgba(63, 28, 58, 0.72);
+        cursor: pointer;
+      }
+
+      .lightbox-figure {
+        min-height: 0;
+        margin: 0;
+        border: 1px solid rgba(255, 212, 232, 0.2);
+        border-radius: 1.35rem;
+        overflow: hidden;
+        background: rgba(21, 9, 24, 0.72);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      }
+
+      .lightbox-figure img {
+        width: 100%;
+        height: 100%;
+        max-height: calc(90vh - 8.2rem);
+        display: block;
+        object-fit: contain;
       }
 
       @keyframes twinkle {
@@ -332,7 +505,8 @@
 
         .hero {
           min-height: auto;
-          padding: 4rem 0 2rem;
+          padding: 3.2rem 1.1rem 1.1rem;
+          border-radius: 1.3rem;
         }
 
         .music-row {
@@ -344,12 +518,48 @@
           width: 100%;
         }
 
-        .memory-grid {
-          grid-template-columns: 1fr;
-        }
-
         .section-heading {
           display: block;
+        }
+
+        .gallery-summary {
+          width: fit-content;
+          margin-top: 1rem;
+        }
+
+        .month-heading {
+          display: block;
+        }
+
+        .month-count {
+          display: block;
+          margin-top: 0.35rem;
+        }
+
+        .photo-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.55rem;
+        }
+
+        .photo-card {
+          border-radius: 0.82rem;
+        }
+
+        .lightbox {
+          padding: 0.55rem;
+        }
+
+        .lightbox-panel {
+          max-height: 94vh;
+        }
+
+        .lightbox-bar,
+        .lightbox-actions {
+          gap: 0.5rem;
+        }
+
+        .lightbox-button {
+          padding: 0.68rem 0.82rem;
         }
       }
 
@@ -371,7 +581,7 @@
           <p class="eyebrow">A small birthday universe</p>
           <h1>生日快乐</h1>
           <p class="subtitle">
-            这里会慢慢装进我们一起走过的地方、看过的风景、听过的歌，还有那些只有我们知道的小瞬间。
+            我把 3 月到 7 月能找到的照片都放进来了。它们会在音乐里慢慢展开，像一封可以翻看的生日信。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#memories">先看看回忆</a>
@@ -391,45 +601,162 @@
         </section>
       </section>
 
-      <section class="section" id="memories" aria-label="回忆占位">
+      <section class="section" id="memories" aria-label="照片回忆">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Memory seeds</p>
-            <h2>先留几个位置，等照片到来</h2>
-            <p>后面你把照片和想说的话给我，这里会变成真正的回忆时间线。</p>
+            <p class="eyebrow">March to July</p>
+            <h2>这些日子都在这里</h2>
+            <p>按月份把照片排好，点开任意一张就能慢慢翻。</p>
           </div>
+          <div class="gallery-summary"><span data-photo-count>91</span> 张照片</div>
         </div>
 
-        <div class="memory-grid">
-          <article class="memory-card">
-            <h3>第一次认真记住的地方</h3>
-            <p>这里可以放第一组照片，写下那天为什么特别。</p>
-          </article>
-          <article class="memory-card">
-            <h3>一起走过的夜晚</h3>
-            <p>适合放街景、晚餐、散步和那些很轻但很亮的瞬间。</p>
-          </article>
-          <article class="memory-card">
-            <h3>还想继续去的明天</h3>
-            <p>最后可以做成祝福页，把生日快乐说得更郑重一点。</p>
-          </article>
-        </div>
+        <div class="month-list" data-gallery></div>
       </section>
 
       <section class="letter" aria-label="生日祝福">
         <p class="eyebrow">To be continued</p>
         <h2>愿今天被温柔地记住</h2>
         <p>
-          这只是一个开始。等照片和文字都放进来，它会变成一封可以打开、可以听见、也可以慢慢翻看的生日信。
+          很多话可以之后再慢慢补上，但这些照片已经先替我们保存好了：一起出门、一起停下、一起把普通日子过成回忆。
         </p>
       </section>
     </main>
 
     <div class="floating-heart" aria-hidden="true">♥</div>
 
+    <div class="lightbox" data-lightbox hidden aria-modal="true" role="dialog" aria-label="查看照片">
+      <button class="lightbox-backdrop" type="button" data-lightbox-close aria-label="关闭照片"></button>
+      <div class="lightbox-panel">
+        <div class="lightbox-bar">
+          <span class="lightbox-caption" data-lightbox-caption></span>
+          <button class="lightbox-button" type="button" data-lightbox-close>关闭</button>
+        </div>
+        <figure class="lightbox-figure">
+          <img data-lightbox-image src="" alt="" />
+        </figure>
+        <div class="lightbox-actions">
+          <button class="lightbox-button" type="button" data-lightbox-prev>上一张</button>
+          <button class="lightbox-button" type="button" data-lightbox-next>下一张</button>
+        </div>
+      </div>
+    </div>
+
     <audio data-audio preload="auto"></audio>
 
     <script>
+      const photoMonths = [
+        { label: "3月", folder: "03", count: 12, note: "春天刚开始认真留下痕迹。" },
+        { label: "4月", folder: "04", count: 10, note: "一些出门、停留和靠近的时刻。" },
+        { label: "5月", folder: "05", count: 16, note: "照片变多了，记忆也变得更满。" },
+        { label: "6月", folder: "06", count: 50, note: "六月像一整盒彩色碎片，被好好收了起来。" },
+        { label: "7月", folder: "07", count: 3, note: "新的月份也已经开始写下来了。" },
+      ];
+
+      const gallery = document.querySelector("[data-gallery]");
+      const photoCount = document.querySelector("[data-photo-count]");
+      const lightbox = document.querySelector("[data-lightbox]");
+      const lightboxImage = document.querySelector("[data-lightbox-image]");
+      const lightboxCaption = document.querySelector("[data-lightbox-caption]");
+      const closeLightboxButtons = Array.from(document.querySelectorAll("[data-lightbox-close]"));
+      const prevPhotoButton = document.querySelector("[data-lightbox-prev]");
+      const nextPhotoButton = document.querySelector("[data-lightbox-next]");
+
+      const photos = photoMonths.flatMap((month) =>
+        Array.from({ length: month.count }, (_, index) => {
+          const number = String(index + 1).padStart(3, "0");
+          return {
+            month: month.label,
+            monthCount: month.count,
+            monthIndex: index + 1,
+            src: `./photos/${month.folder}/${month.folder}-${number}.jpg`,
+            alt: `${month.label}的第 ${index + 1} 张照片`,
+          };
+        }),
+      );
+
+      let activePhotoIndex = 0;
+
+      function renderGallery() {
+        photoCount.textContent = photos.length;
+        gallery.innerHTML = photoMonths
+          .map((month) => {
+            const startIndex = photos.findIndex((photo) => photo.month === month.label);
+            const cards = Array.from({ length: month.count }, (_, index) => {
+              const photo = photos[startIndex + index];
+              return `
+                <button class="photo-card" type="button" data-photo-index="${startIndex + index}" aria-label="打开${photo.alt}">
+                  <img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async" />
+                </button>
+              `;
+            }).join("");
+
+            return `
+              <article class="month-block">
+                <div class="month-heading">
+                  <div>
+                    <p class="eyebrow">${month.folder}</p>
+                    <h3>${month.label}</h3>
+                    <p>${month.note}</p>
+                  </div>
+                  <span class="month-count">${month.count} 张</span>
+                </div>
+                <div class="photo-grid">${cards}</div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function showPhoto(index) {
+        activePhotoIndex = (index + photos.length) % photos.length;
+        const photo = photos[activePhotoIndex];
+        lightboxImage.src = photo.src;
+        lightboxImage.alt = photo.alt;
+        lightboxCaption.textContent = `${photo.month} · 第 ${photo.monthIndex} / ${photo.monthCount} 张`;
+        lightbox.hidden = false;
+        document.body.classList.add("lightbox-open");
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightboxImage.src = "";
+        document.body.classList.remove("lightbox-open");
+      }
+
+      gallery.addEventListener("click", (event) => {
+        const trigger = event.target.closest("[data-photo-index]");
+        if (!trigger) {
+          return;
+        }
+        showPhoto(Number(trigger.dataset.photoIndex));
+      });
+
+      closeLightboxButtons.forEach((button) => {
+        button.addEventListener("click", closeLightbox);
+      });
+
+      prevPhotoButton.addEventListener("click", () => showPhoto(activePhotoIndex - 1));
+      nextPhotoButton.addEventListener("click", () => showPhoto(activePhotoIndex + 1));
+
+      document.addEventListener("keydown", (event) => {
+        if (lightbox.hidden) {
+          return;
+        }
+
+        if (event.key === "Escape") {
+          closeLightbox();
+        }
+
+        if (event.key === "ArrowLeft") {
+          showPhoto(activePhotoIndex - 1);
+        }
+
+        if (event.key === "ArrowRight") {
+          showPhoto(activePhotoIndex + 1);
+        }
+      });
+
       const tracks = [
         { title: "古堡钢琴曲", src: "./audio/castle-piano.mp3" },
         { title: "梦境", src: "./audio/dream.ogg" },
@@ -489,6 +816,7 @@
       });
 
       setTrack(0);
+      renderGallery();
       playMusic();
     </script>
   </body>

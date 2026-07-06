@@ -19,6 +19,7 @@ const DIFFICULTY_LABELS: Record<DifficultyMode, string> = {
 
 const COMPLETION_HEART_DURATION_MS = 1700;
 const REDUCED_MOTION_HEART_DURATION_MS = 420;
+const BIRTHDAY_SITE_PATH = `${import.meta.env.BASE_URL}birthday/index.html`;
 
 function createFreshSeed(): number {
   return Math.floor(Math.random() * 1_000_000_000);
@@ -352,6 +353,9 @@ export default function App() {
             <h2 id="completion-title">恭喜通关</h2>
             <p className="completion-message">看来我们之间的经历你并没有忘记</p>
             <p>你已经找出了本局全部 {totalCount} 个名称。</p>
+            <a className="gift-link" href={BIRTHDAY_SITE_PATH}>
+              打开生日礼物
+            </a>
             <div className="completion-actions">
               <button type="button" className="ghost-button" onClick={handleRestart}>
                 重开本局
