@@ -92,7 +92,7 @@
         padding: clamp(2rem, 6vw, 4.2rem);
         background:
           linear-gradient(90deg, rgba(21, 9, 24, 0.78), rgba(43, 17, 40, 0.48) 48%, rgba(43, 17, 40, 0.2)),
-          url("./photos/06/06-001.jpg") center / cover;
+          url("./photos/IMG_20260607_183911.jpg") center / cover;
         box-shadow: 0 28px 72px rgba(24, 8, 28, 0.34);
       }
 
@@ -256,6 +256,22 @@
       .section-heading p {
         margin: 0.35rem 0 0;
         color: var(--muted);
+      }
+
+      .memory-lines {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .memory-line {
+        border: 1px solid rgba(255, 212, 232, 0.18);
+        border-radius: 1rem;
+        padding: 0.95rem 1rem;
+        background: rgba(69, 26, 58, 0.42);
+        color: #ffe4f0;
+        line-height: 1.8;
       }
 
       .gallery-summary {
@@ -522,6 +538,10 @@
           display: block;
         }
 
+        .memory-lines {
+          grid-template-columns: 1fr;
+        }
+
         .gallery-summary {
           width: fit-content;
           margin-top: 1rem;
@@ -581,7 +601,7 @@
           <p class="eyebrow">A small birthday universe</p>
           <h1>生日快乐</h1>
           <p class="subtitle">
-            我把 3 月到 7 月能找到的照片都放进来了。它们会在音乐里慢慢展开，像一封可以翻看的生日信。
+            我把 3 月到 7 月的光、风、晚餐、花和城市夜色都收在这里。愿你点开每一张时，都能想起那天不慌不忙的快乐。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#memories">先看看回忆</a>
@@ -606,9 +626,15 @@
           <div>
             <p class="eyebrow">March to July</p>
             <h2>这些日子都在这里</h2>
-            <p>按月份把照片排好，点开任意一张就能慢慢翻。</p>
+            <p>按日期把照片排好，点开任意一张，就能回到那一小段时间里。</p>
           </div>
-          <div class="gallery-summary"><span data-photo-count>91</span> 张照片</div>
+          <div class="gallery-summary"><span data-photo-count>120</span> 张照片</div>
+        </div>
+
+        <div class="memory-lines" aria-label="回忆片段">
+          <p class="memory-line">第一次见面之后，黄浦江上的风和两岸灯光，把三月轻轻推成了故事的开头。</p>
+          <p class="memory-line">我们吃过饭，走过路，停下来拍过很多看似普通、后来却很珍贵的瞬间。</p>
+          <p class="memory-line">这一页不是把时间留住，只是把“幸好我们一起见过”轻轻放在你面前。</p>
         </div>
 
         <div class="month-list" data-gallery></div>
@@ -618,7 +644,7 @@
         <p class="eyebrow">To be continued</p>
         <h2>愿今天被温柔地记住</h2>
         <p>
-          很多话可以之后再慢慢补上，但这些照片已经先替我们保存好了：一起出门、一起停下、一起把普通日子过成回忆。
+          从三月第一次见面后的黄浦江夜色，到四月的南浔古镇、雨中的共青森林公园和前滩花展；从五月的蛋糕、街道和晚风，到六月的日落、古建、石窟和高处的城市；再到七月那些可爱的、像暗号一样的小瞬间。生日快乐。愿你新的一岁继续被认真喜欢，也继续被世界温柔照亮。
         </p>
       </section>
     </main>
@@ -645,12 +671,221 @@
     <audio data-audio preload="auto"></audio>
 
     <script>
-      const photoMonths = [
-        { label: "3月", folder: "03", count: 12, note: "春天刚开始认真留下痕迹。" },
-        { label: "4月", folder: "04", count: 10, note: "一些出门、停留和靠近的时刻。" },
-        { label: "5月", folder: "05", count: 16, note: "照片变多了，记忆也变得更满。" },
-        { label: "6月", folder: "06", count: 50, note: "六月像一整盒彩色碎片，被好好收了起来。" },
-        { label: "7月", folder: "07", count: 3, note: "新的月份也已经开始写下来了。" },
+      const photoGroups = [
+        {
+          date: "20260314",
+          note: "初次见面，光明玖壹玖餐厅。饭后一起在城市里慢慢散步，欣赏春日的美景。我们聊得很投机，话说张世杰找的这个餐厅名字也太应景了，99~",
+          files: [
+            "Camera_XHS_1783437049125.jpg",
+            "Camera_XHS_1783437062431.jpg",
+            "Camera_XHS_1783437137337.jpg",
+          ],
+        },
+        {
+          date: "20260322",
+          note: "第一次出去游玩，邀请你来北外滩一起坐黄浦江游船。我发现我们的喜好很像，你记忆力真的很好，十几年前的足球比赛都记得很清楚，还喜欢历史和战争类长视频，惊喜~ 同时也收到了你的第一份礼物：面包节小人哈哈哈。",
+          files: [
+            "IMG_20260322_180245.jpg",
+            "IMG_20260322_184409.jpg",
+            "IMG_20260322_185520.jpg",
+            "IMG_20260322_192314.jpg",
+            "IMG_20260322_193428.jpg",
+            "IMG_20260322_200004.jpg",
+            "IMG_20260322_202945.jpg",
+            "IMG_20260322_205458.jpg",
+            "IMG_20260322_225727.jpg",
+          ],
+        },
+        {
+          date: "20260329",
+          note: "第一次一起看电影，《挽救计划》，非常棒的电影。其实电影里我几次都想去牵你的手，但最后鼓起勇气也只是偷偷碰了一下，嘻嘻！之后我们逛了逛徐汇滨江，还遇到不少可爱的小狗。",
+          files: [
+            "68831cf07b25c175342308856205.gif",
+            "Project_Hail_Mary_Poster.jpg",
+          ],
+        },
+        {
+          date: "20260405",
+          note: "南浔古镇，春暖花开去见你~ 除了人多，真的是很 fancy 的经历，也算是第一次一起旅游啦。",
+          files: [
+            "IMG_20260405_100837.jpg",
+            "IMG_20260405_101302.jpg",
+            "IMG_20260405_131720.jpg",
+            "IMG_20260405_135624.jpg",
+            "IMG_20260405_144725.jpg",
+            "IMG_20260405_153031.jpg",
+          ],
+        },
+        {
+          date: "20260412",
+          note: "共青森林公园，第一次因为出门忘记看天气预报，被迫雨中漫步 hhh。不过阴雨天的共青森林公园别有一番情调；-）",
+          files: [
+            "IMG_20260412_125126.jpg",
+            "IMG_20260412_125135.jpg",
+            "IMG_20260412_132620.jpg",
+            "IMG_20260412_135128.jpg",
+            "IMG_20260412_140019.jpg",
+            "IMG_20260412_140142.jpg",
+            "IMG_20260412_140149.jpg",
+            "IMG_20260412_140756.jpg",
+            "IMG_20260412_141757.jpg",
+            "IMG_20260412_142351.jpg",
+            "IMG_20260412_142353.jpg",
+            "IMG_20260412_151521.jpg",
+          ],
+        },
+        {
+          date: "20260418",
+          note: "前滩花展，你送回了我凯恩和伯尼熊，我们也正式在一起啦！当我鼓起勇气对你表白的时候，我感觉全世界都是见证者，在注视着我们~~",
+          files: [
+            "IMG_20260418_133442.jpg",
+            "IMG_20260418_133631.jpg",
+            "IMG_20260418_133805.jpg",
+            "IMG_20260418_134322.jpg",
+            "IMG_20260418_134557.jpg",
+            "IMG_20260418_140157.jpg",
+            "IMG_20260418_171339.jpg",
+            "IMG_20260707_231510.jpg",
+          ],
+        },
+        {
+          date: "20260425",
+          note: "喜欢 city walk 的我俩又逛了好几个地方：四行仓库、苏州河、邮政博物馆。感受幸福当下的同时，又不忘感知历史的厚重感，想到这里便更加珍惜所拥有的一切。",
+          files: [
+            "IMG_20260425_115437.jpg",
+            "IMG_20260425_115504.jpg",
+            "IMG_20260425_145411.jpg",
+            "IMG_20260425_145442.jpg",
+            "IMG_20260425_145446.jpg",
+            "IMG_20260425_152301.jpg",
+            "IMG_20260425_152611.jpg",
+            "IMG_20260425_153712.jpg",
+            "IMG_20260425_154208.jpg",
+            "IMG_20260425_155508.jpg",
+          ],
+        },
+        {
+          date: "20260510",
+          note: "生日 + 新裤子演唱会！人生中最美妙的生日。看你为我精心准备的蛋糕，感觉自己是世界上最幸福的人，没有之一！",
+          files: [
+            "IMG_20260510_123929.jpg",
+            "IMG_20260510_124436.jpg",
+            "IMG_20260510_132554.jpg",
+            "IMG_20260510_134725.jpg",
+            "IMG_20260510_150644.jpg",
+            "IMG_20260510_165902.jpg",
+            "IMG_20260510_181725.jpg",
+          ],
+        },
+        {
+          date: "20260512",
+          note: "粗心大意的我忘记拆了你给我的贺卡，呜呜，感动到流泪。但我其实是个很坚强的人，真的！！",
+          files: ["IMG_20260512_223126.jpg"],
+        },
+        {
+          date: "20260524",
+          note: "一起看的第二场电影，也是我们认识以来走得最长的一次城市漫步。虽然下雨，沿着狭窄的愚园路一直走不太方便，但身边有你，我总是可以忘却一切烦恼~",
+          files: [
+            "IMG_20260524_175735.jpg",
+            "IMG_20260524_191708.jpg",
+            "IMG_20260524_193107.jpg",
+            "IMG_20260524_224029.jpg",
+          ],
+        },
+        {
+          date: "20260531",
+          note: "魔都迷踪解密游戏，把解谜融入 city walk 中，相当有意思。我特别喜欢这组照片最后一张，你笑得特别灿烂。你拍夜景，我拍你，嘿嘿~",
+          files: [
+            "IMG_20260531_124534.jpg",
+            "IMG_20260531_135950.jpg",
+            "IMG_20260531_151223.jpg",
+            "IMG_20260531_190532.jpg",
+            "IMG_20260531_190536.jpg",
+          ],
+        },
+        {
+          date: "20260607",
+          note: "淀山湖看日落。一开始找错了停车场，但还是赶上了日落前的最后几分钟，景美人更美。",
+          files: [
+            "IMG_20260607_183911.jpg",
+            "IMG_20260607_183920.jpg",
+            "IMG_20260607_185050.jpg",
+            "IMG_20260607_185051.jpg",
+            "IMG_20260607_185051_1.jpg",
+            "IMG_20260607_185057.jpg",
+            "IMG_20260607_185100.jpg",
+            "IMG_20260607_185120.jpg",
+          ],
+        },
+        {
+          date: "20260614",
+          note: "hiphop 体验课，笨拙如我总是记不住动作，不过也算锻炼了。欸，菜就多练练吧；晚上去逛了武康路。",
+          files: [
+            "IMG_20260614_193031.jpg",
+            "IMG_20260614_193113.jpg",
+            "IMG_20260614_193147.jpg",
+          ],
+        },
+        {
+          date: "20260619-20260621",
+          note: "第一次正式出去旅游。预报要下雨的情况下，第二天在洛阳居然没下！哈哈，老天爷也在眷顾我们的爱情，一定是！",
+          files: [
+            "IMG_20260619_170029.jpg",
+            "IMG_20260619_170156.jpg",
+            "IMG_20260619_183500.jpg",
+            "IMG_20260619_183510.jpg",
+            "IMG_20260619_183512.jpg",
+            "IMG_20260619_183517.jpg",
+            "IMG_20260620_101829.jpg",
+            "IMG_20260620_101839.jpg",
+            "IMG_20260620_102016_1.jpg",
+            "IMG_20260620_103403.jpg",
+            "IMG_20260620_104331.jpg",
+            "IMG_20260620_104335.jpg",
+            "IMG_20260620_105850.jpg",
+            "IMG_20260620_110812.jpg",
+            "IMG_20260620_144517.jpg",
+            "IMG_20260620_144519.jpg",
+            "IMG_20260620_144646.jpg",
+            "IMG_20260620_150235.jpg",
+            "IMG_20260620_150246.jpg",
+            "IMG_20260620_150637.jpg",
+            "IMG_20260620_150640.jpg",
+            "IMG_20260620_150657.jpg",
+            "IMG_20260620_153139.jpg",
+            "IMG_20260620_154153.jpg",
+            "IMG_20260620_154156.jpg",
+            "IMG_20260620_154157.jpg",
+            "IMG_20260620_154158.jpg",
+            "IMG_20260620_162636.jpg",
+            "IMG_20260620_163738.jpg",
+          ],
+        },
+        {
+          date: "20260628",
+          note: "东方明珠，拍到了我认为你最美的一张照片。谁说你不上镜的呀？",
+          files: [
+            "IMG_20260628_170034.jpg",
+            "IMG_20260628_174319.jpg",
+            "IMG_20260628_174644.jpg",
+            "IMG_20260628_175042.jpg",
+            "IMG_20260628_175102.jpg",
+            "IMG_20260628_175249.jpg",
+            "IMG_20260628_175252.jpg",
+            "IMG_20260628_175451.jpg",
+            "IMG_20260628_175452.jpg",
+            "IMG_20260628_184540.jpg",
+          ],
+        },
+        {
+          date: "20260705",
+          note: "第三次一起看电影，第一次一起打游戏，第一次一起拼豆。心灵手巧的你做得贼快，也很稳。话说这个拼豆真的蛮有意思的，以后可以多试试~",
+          files: [
+            "IMG_20260705_210901.jpg",
+            "IMG_20260705_211744.jpg",
+            "IMG_20260705_211833.jpg",
+          ],
+        },
       ];
 
       const gallery = document.querySelector("[data-gallery]");
@@ -662,15 +897,24 @@
       const prevPhotoButton = document.querySelector("[data-lightbox-prev]");
       const nextPhotoButton = document.querySelector("[data-lightbox-next]");
 
-      const photos = photoMonths.flatMap((month) =>
-        Array.from({ length: month.count }, (_, index) => {
-          const number = String(index + 1).padStart(3, "0");
+      function formatDateLabel(date) {
+        if (date.includes("-")) {
+          return date.split("-").map(formatDateLabel).join(" - ");
+        }
+
+        return `${date.slice(0, 4)}.${date.slice(4, 6)}.${date.slice(6, 8)}`;
+      }
+
+      const photos = photoGroups.flatMap((group) =>
+        group.files.map((file, index) => {
+          const groupLabel = formatDateLabel(group.date);
           return {
-            month: month.label,
-            monthCount: month.count,
-            monthIndex: index + 1,
-            src: `./photos/${month.folder}/${month.folder}-${number}.jpg`,
-            alt: `${month.label}的第 ${index + 1} 张照片`,
+            date: group.date,
+            groupLabel,
+            groupCount: group.files.length,
+            groupIndex: index + 1,
+            src: `./photos/${file}`,
+            alt: `${groupLabel}的第 ${index + 1} 张照片`,
           };
         }),
       );
@@ -679,14 +923,15 @@
 
       function renderGallery() {
         photoCount.textContent = photos.length;
-        gallery.innerHTML = photoMonths
-          .map((month) => {
-            const startIndex = photos.findIndex((photo) => photo.month === month.label);
-            const cards = Array.from({ length: month.count }, (_, index) => {
-              const photo = photos[startIndex + index];
-              return `
-                <button class="photo-card" type="button" data-photo-index="${startIndex + index}" aria-label="打开${photo.alt}">
-                  <img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async" />
+        gallery.innerHTML = photoGroups
+          .map((group) => {
+            const groupLabel = formatDateLabel(group.date);
+            const startIndex = photos.findIndex((photo) => photo.date === group.date);
+            const groupPhotos = photos.filter((photo) => photo.date === group.date);
+            const cards = groupPhotos.map((photo, index) => {
+                return `
+                  <button class="photo-card" type="button" data-photo-index="${startIndex + index}" aria-label="打开${photo.alt}">
+                    <img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async" />
                 </button>
               `;
             }).join("");
@@ -695,11 +940,11 @@
               <article class="month-block">
                 <div class="month-heading">
                   <div>
-                    <p class="eyebrow">${month.folder}</p>
-                    <h3>${month.label}</h3>
-                    <p>${month.note}</p>
+                    <p class="eyebrow">${group.date}</p>
+                    <h3>${groupLabel}</h3>
+                    ${group.note ? `<p>${group.note}</p>` : ""}
                   </div>
-                  <span class="month-count">${month.count} 张</span>
+                  <span class="month-count">${groupPhotos.length} 张</span>
                 </div>
                 <div class="photo-grid">${cards}</div>
               </article>
@@ -713,7 +958,7 @@
         const photo = photos[activePhotoIndex];
         lightboxImage.src = photo.src;
         lightboxImage.alt = photo.alt;
-        lightboxCaption.textContent = `${photo.month} · 第 ${photo.monthIndex} / ${photo.monthCount} 张`;
+        lightboxCaption.textContent = `${photo.groupLabel} · 第 ${photo.groupIndex} / ${photo.groupCount} 张`;
         lightbox.hidden = false;
         document.body.classList.add("lightbox-open");
       }
