@@ -644,7 +644,7 @@
         <p class="eyebrow">To be continued</p>
         <h2>愿今天被温柔地记住</h2>
         <p>
-          从三月第一次见面后的黄浦江夜色，到四月的南浔古镇、雨中的共青森林公园和前滩花展；从五月的蛋糕、街道和晚风，到六月的日落、古建、石窟和高处的城市；再到七月那些可爱的、像暗号一样的小瞬间。生日快乐。愿你新的一岁继续被认真喜欢，也继续被世界温柔照亮。
+          从三月第一次见面后的黄浦江夜色，到四月的南浔古镇、雨中的共青森林公园和前滩花展；从五月的蛋糕、街道和晚风，到六月的日落、古建、石窟和高处的城市；再到七月那些可爱的、像暗号一样的小瞬间。宁宁，生日快乐！这是我陪你过第一个生日，未来一定还会有很多个！
         </p>
       </section>
     </main>
@@ -780,7 +780,7 @@
         {
           date: "20260512",
           note: "粗心大意的我忘记拆了你给我的贺卡，呜呜，感动到流泪。但我其实是个很坚强的人，真的！！",
-          files: ["IMG_20260512_223126.jpg"],
+          files: [{ name: "IMG_20260512_223126.jpg", version: "rotated-20260708" }],
         },
         {
           date: "20260524",
@@ -913,12 +913,14 @@
       const photos = photoGroups.flatMap((group) =>
         group.files.map((file, index) => {
           const groupLabel = formatDateLabel(group.date);
+          const fileName = typeof file === "string" ? file : file.name;
+          const fileVersion = typeof file === "string" ? "" : `?v=${file.version}`;
           return {
             date: group.date,
             groupLabel,
             groupCount: group.files.length,
             groupIndex: index + 1,
-            src: `./photos/${file}`,
+            src: `./photos/${fileName}${fileVersion}`,
             alt: `${groupLabel}的第 ${index + 1} 张照片`,
           };
         }),
